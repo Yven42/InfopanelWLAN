@@ -1,0 +1,7 @@
+../Drivers/EEPROM/ee.c:176:6:ee_init	1
+../Drivers/EEPROM/ee.c:185:6:ee_format	3
+../Drivers/EEPROM/ee.c:227:6:ee_read	4
+../Drivers/EEPROM/ee.c:246:6:ee_write	5
+../Drivers/EEPROM/ee.c:295:6:ee_writeToRam	1
+../Drivers/EEPROM/ee.c:309:7:ee_commit	1
+../Drivers/EEPROM/ee.c:320:11:ee_maxVirtualAddress	1

@@ -1,0 +1,7 @@
+../Drivers/WLAN_Web/WLAN_Web.c:33:6:vReplaceMacAddress	32	static
+../Drivers/WLAN_Web/WLAN_Web.c:52:9:u8ParseMacAddress	24	static
+../Drivers/WLAN_Web/WLAN_Web.c:76:9:u8WifiMAC	16	static
+../Drivers/WLAN_Web/WLAN_Web.c:84:13:puParseStringToStruct	88	static
+../Drivers/WLAN_Web/WLAN_Web.c:175:9:u8Send_HTML	72	static
+../Drivers/WLAN_Web/WLAN_Web.c:207:16:WLAN_Web_Start	192	static
+../Drivers/WLAN_Web/WLAN_Web.c:241:9:u8SendReport	216	static

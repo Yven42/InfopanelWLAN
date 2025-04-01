@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netzwerk-Konfiguration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-group input[readonly] {
+            background-color: #e9ecef;
+            cursor: not-allowed;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+        .message {
+            margin-top: 15px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Konfiguration Infopanel</h1>
+    <div class="container">
+        <form id="config-form">
+            <div class="form-group">
+                <label for="device-name">Gerätename:</label>
+                <input type="text" id="device-name" name="device-name">
+            </div>
+            <div class="form-group">
+                <label for="wlan-name">WLAN-Name:</label>
+                <input type="text" id="wlan-name" name="wlan-name">
+            </div>
+            <div class="form-group">
+                <label for="wlan-password">WLAN-Passwort:</label>
+                <input type="password" id="wlan-password" name="wlan-password">
+            </div>
+            <div class="form-group">
+                <label for="domain">Domain:</label>
+                <input type="text" id="domain" name="domain">
+            </div>
+            <div class="form-group">
+                <label for="tcp-server-ip">TCP-Server-IP:</label>
+                <input type="text" id="tcp-server-ip" name="tcp-server-ip">
+            </div>
+            <div class="form-group">
+                <label for="tcp-server-port">TCP-Server-Port:</label>
+                <input type="text" id="tcp-server-port" name="tcp-server-port">
+            </div>
+            <div class="form-group">
+                <label for="mac-address">MAC-Adresse:</label>
+                <input type="text" id="mac-address" name="mac-address" value="ff:ff:ff:ff:ff:ff" readonly>
+            </div>
+            <div class="form-group">
+                <button type="submit">Senden</button>
+            </div>
+        </form>
+        <div id="message" class="message"></div>
+    </div>
+    <script>
+        document.getElementById('config-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            let dataString = '';
+            formData.forEach((value, key) => {
+                dataString += `${key}=${value};`;
+            });
+            dataString = dataString.slice(0, -1);
+            console.log(dataString);
+            fetch('your-server-endpoint', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/plain'
+                },
+                body: dataString
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log('Success:', data);
+                document.getElementById('message').innerText = data.includes('report=') ? data.split('report=')[1] : 'Unbekannte Rückmeldung';
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                document.getElementById('message').innerText = 'Fehler beim Senden der Daten';
+            });
+        });
+    </script>
+</body>
+</html>
